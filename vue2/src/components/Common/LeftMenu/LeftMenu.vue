@@ -11,10 +11,9 @@
                         :default-active="$route.path"
                         unique-opened 
                         router>
-                        <!-- v-if="!item.hidden && $store.state.user.userinfo.access.indexOf(route.path+'/'+item.path)===-1" -->
                         <template 
                             v-for="(item,index) in route.children" 
-                            v-if="!item.hidden">
+                            v-if="!item.hidden && (($store.state.global.access_flag===true && $store.state.user.userinfo.accesss && $store.state.user.userinfo.accesss.indexOf(route.path+'/'+item.path)!==-1) || $store.state.global.access_flag===false || $store.state.user.userinfo.pid===0)">
                             <el-submenu 
                                 :index="item.path">
                                 <template 
@@ -29,13 +28,11 @@
                                     </el-tooltip>
                                     <span 
                                         class='menu-name' 
-                                        v-if="$store.state.leftmenu.menu_flag">{{item.name}}<!-- {{route.path+'/'+item.path}} --></span>
+                                        v-if="$store.state.leftmenu.menu_flag">{{item.name}}</span>
                                 </template>
-
-                                <!-- v-if="!child.hidden && $store.state.user.userinfo.access.indexOf(route.path+'/'+item.path+'/'+child.path)===-1" -->
                                 <el-menu-item 
                                     v-for='(child,cindex) in item.children' 
-                                    v-if="!child.hidden"
+                                    v-if="!child.hidden && (($store.state.global.access_flag===true && $store.state.user.userinfo.accesss && $store.state.user.userinfo.accesss.indexOf(route.path+'/'+item.path+'/'+child.path)!==-1) || $store.state.global.access_flag===false || $store.state.user.userinfo.pid===0)"
                                     :style="{'padding-left':$store.state.leftmenu.menu_flag? '40px' : '23px'}" 
                                     :index='$store.state.router.headerCurRouter+"/"+item.path+"/"+child.path'>
                                     <el-tooltip 
@@ -48,7 +45,7 @@
                                     </el-tooltip>
                                     <span 
                                         class='menu-name' 
-                                        v-if="$store.state.leftmenu.menu_flag">{{child.name}}<!-- {{route.path+'/'+item.path+'/'+child.path}} --></span>
+                                        v-if="$store.state.leftmenu.menu_flag">{{child.name}}</span>
                                 </el-menu-item>
                             </el-submenu>
                         </template>
@@ -112,9 +109,6 @@
             });
 
             this.updateCurMenu();
-        },
-        mounted(){
-            // console.log(this.$store.state.user.userinfo.access);
         },
         watch:{
             $route(to,from){

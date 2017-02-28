@@ -73,7 +73,6 @@ module.exports = {
                             this.$store.dispatch('remove_remumber');
                         }
 
-                        // this.$set(data.userinfo, 'access', ['/adv', '/demo/user', '/demo/user/list']);
                         this.$store.dispatch('update_userinfo', {
                             userinfo: data.userinfo
                         }).then(() => {

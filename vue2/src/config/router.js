@@ -205,6 +205,11 @@ module.exports = [{
             name: '编辑用户',
             icon: 'edit',
             component: Modules.Adv.User.Edit
+        }, {
+            path: 'access',
+            name: '权限管理',
+            icon: 'edit',
+            component: Modules.Adv.User.Access
         }]
     }]
 }];

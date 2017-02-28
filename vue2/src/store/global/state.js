@@ -4,5 +4,7 @@ import {
 
 
 module.exports = {
-    ajax_loading: false
+    ajax_loading: false,
+
+    access_flag: true
 };

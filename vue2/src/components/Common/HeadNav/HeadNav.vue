@@ -19,13 +19,12 @@
                     </el-submenu> -->
                     <!-- <el-menu-item index="2">商城中心</el-menu-item>
                     <el-menu-item index="3">系统设置</el-menu-item> -->
-                    
-                    <!-- v-if='!item.hidden && $store.state.user.userinfo.access.indexOf(item.path)===-1' -->
+
                     <el-menu-item 
-                        :index="item.path" 
                         v-for='(item,index) in $router.options.routes' 
-                        v-if='!item.hidden'>
-                        {{item.name}}<!-- {{item.path}} -->
+                        :index="item.path" 
+                        v-if='!item.hidden && (($store.state.global.access_flag===true && $store.state.user.userinfo.accesss && $store.state.user.userinfo.accesss.indexOf(item.path)!==-1) || $store.state.global.access_flag===false || $store.state.user.userinfo.pid===0)'>
+                        {{item.name}}
                     </el-menu-item>
                 </el-menu>
             </el-col>

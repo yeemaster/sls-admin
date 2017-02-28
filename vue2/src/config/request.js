@@ -141,7 +141,7 @@ module.exports = {
 		},
 
 		/**
-		 * 设置权限
+		 * 设置基本权限
 		 * @param  {object}   data 参数
 		 * @param {string} data.id 数据ID
 		 * @param {string} data.login_style 登录方式，1：单点登录；2：多点登录
@@ -150,6 +150,18 @@ module.exports = {
 		 */
 		accessUser(data, fn) {
 			ajax.call(this, 'post', '/User/accessUser', data, fn);
+		},
+
+
+		/**
+		 * 设置高级权限
+		 * @param  {object}   data 参数
+		 * @param {string} data.user_id 用户ID，多个用英文逗号隔开
+		 * @param {string} data.user_accesss 能访问的页面路由,多个用逗号隔开
+		 * @param  {Function} fn   成功回调
+		 */
+		setAccessUser(data, fn) {
+			ajax.call(this, 'post', '/User/setAccessUser', data, fn);
 		}
 	},
 
